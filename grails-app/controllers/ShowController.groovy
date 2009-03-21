@@ -1,0 +1,4 @@
+class ShowController {
+
+    def index = { }
+}
