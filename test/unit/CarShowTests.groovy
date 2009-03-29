@@ -1,6 +1,6 @@
 import grails.test.*
 
-class ShowTests extends GrailsUnitTestCase {
+class CarShowTests extends GrailsUnitTestCase {
     protected void setUp() {
         super.setUp()
     }

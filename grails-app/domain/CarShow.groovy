@@ -1,4 +1,4 @@
-class Show {
+class CarShow {
 
   static constraints = {
     minimumCompetitors(min:3)
