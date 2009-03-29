@@ -1,0 +1,41 @@
+#Reference Documentation for Grails Web Services
+http://grails.org/doc/1.1.x/guide/13.%20Web%20Services.html
+
+#GET ALL SHOWS via REST
+curl -i -H "Accept: text/xml" -X GET http://localhost:8080/JackedUpApp2/rest/carShow/
+#but not without accept type
+curl -i http://localhost:8080/JackedUpApp2/rest/carShow/
+#or a crazy type
+curl -i -H "Accept: text/garbage" -X GET http://localhost:8080/JackedUpApp2/rest/carShow/
+
+#GET ALL SHOWS via HTML
+curl -i http://localhost:8080/JackedUpApp2/carShow/list
+
+
+#DELETE SHOW 1 via REST
+curl -i -H "Accept: text/xml" -X DELETE http://localhost:8080/JackedUpApp2/rest/carShow/1
+
+#DELETE SHOW 1 via HTML
+
+
+#GET ONE SHOW via REST
+curl -i -H "Accept: text/xml" http://localhost:8080/JackedUpApp2/rest/carShow/1
+#or with the content type
+curl -i -H "Content-Type: text/xml" http://localhost:8080/JackedUpApp2/rest/carShow/1
+#or with JSON
+curl -i -H "Content-Type: text/json" http://localhost:8080/JackedUpApp2/rest/carShow/1
+but not
+curl -i -X GET http://localhost:8080/JackedUpApp2/rest/carShow/1
+
+#CONTENT TYPE DETECTION on HTML CONTROLLER
+#GET ONE SHOW VIA HTML
+curl -i -X GET http://localhost:8080/JackedUpApp2/carShow/show/1
+curl -i -H "Accept: text/xml" http://localhost:8080/JackedUpApp2/carShow/show/1
+
+
+#ADD A SHOW
+curl -i -H "Accept: text/xml" -H "Content-Type: text/xml" -X POST http://localhost:8080/JackedUpApp2/rest/show --data "<show id=\"4\"><city>NEWNEW</city><minimumCompetitors>6</minimumCompetitors><state>NEW</state><venue>NEW</venue></show>"
+
+
+#UPDATE A SHOW
+curl -i -H "Accept: text/xml" -H "Content-Type: text/xml" -X PUT http://localhost:8080/rest/show/4 --data "<show id=\"4\"><city>NEWNEW</city><minimumCompetitors>6</minimumCompetitors><state>NEW</state><venue>NEW</venue></show>"

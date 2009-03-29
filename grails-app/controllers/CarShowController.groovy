@@ -6,18 +6,20 @@ class CarShowController {
   def scaffold = true
 
   //GET
-  def carShow = {
+  def show = {
     def carShowInstance = CarShow.get( params.id )
 
-    if(!carShowInstance) {
+    if(carShowInstance == null) {
       flash.message = "CarShow not found with id ${params.id}"
       redirect(action:list)
     }
 
     withFormat {
       html {return [ carShowInstance : carShowInstance ]}
-      js { render carShowInstance as JSON }
+      json { render carShowInstance as JSON }
       xml { render carShowInstance as XML}
     }
-  }  
+  }
+  
+  //All the other controllers are scaffolded
 }

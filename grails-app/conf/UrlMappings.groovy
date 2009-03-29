@@ -6,13 +6,13 @@ class UrlMappings {
         // if you use content type handling to resolve XML and HTML responses.
         // The error is throw by the <g:sortableColumn .../> tag
         // http://jira.codehaus.org/browse/GRAILS-3080
-        "/rest/show"(controller:"carShowREST"){
+        "/rest/carShow"(controller:"carShowREST"){
             action = [GET:"list"]
         }
         
         //The content type routing is too annoying to fully map to the HTML
         // methods so just route it to 
-        "/rest/show/$id?"(resource:"carShowREST")
+        "/rest/carShow/$id?"(resource:"carShowREST")
         
         //Old school (pre-grails-1.1) mapping. Note that parse request has to be
         // set to true in Grails 1.1 to enable XML and JSON parsing.
