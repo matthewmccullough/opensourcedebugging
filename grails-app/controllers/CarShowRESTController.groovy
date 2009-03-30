@@ -3,6 +3,10 @@ import grails.converters.JSON
 import javax.swing.text.html.HTML
 
 class CarShowRESTController {
+  //Not really necessary since the resource RESTful mapping already routes to these four methods
+  // based on the verb, but it shows the power of the constraints
+  static def allowedMethods = [delete:'DELETE', save:'POST', update:'PUT', show:'GET'] 
+  
   /**
    * HTTP GET
    * Retrieve one CarShow
@@ -105,7 +109,50 @@ class CarShowRESTController {
   }
 
   //DELETE
-  def delete = {}
+  def delete = {
+    def hasErrors = false
+    //Get the ID via the URL params
+    def id = params.id
+    //Or if not provided there, try the XML/JSON block to see if the ID is specified there
+    if (id == null) {
+      id = params.carShow.id
+    }
+    def carShowInstance = CarShow.get( id )
+    
+    if (carShowInstance) {
+      carShowInstance.delete()
+    }
+    else {
+      hasErrors = true
+    }
+    
+    withFormat {
+      html {
+        if (hasErrors) {
+          render "ERROR"
+        }
+        else {
+          render "DELETED" 
+        }
+      }
+      json {
+        if (hasErrors) {
+          render "ERROR"
+        }
+        else {
+          render "DELETED" 
+        }
+      }
+      xml {
+        if (hasErrors) {
+          render "ERROR"
+        }
+        else {
+          render "DELETED"
+        }
+      }
+    }
+  }
 
   //GET to retrieve list of all objects
   def list = {
