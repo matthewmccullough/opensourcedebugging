@@ -6,7 +6,11 @@ class UrlMappings {
         // if you use content type handling to resolve XML and HTML responses.
         // The error is throw by the <g:sortableColumn .../> tag
         // http://jira.codehaus.org/browse/GRAILS-3080
-        "/rest/carShow"(controller:"carShowREST"){
+        //
+        //Also note that you should make this method distinguished from the resource (SAVE, UPDATE, DELETE, GET)
+        // or you'll end up with resource collisions, even if you don't have a trailing slash on the
+        // URL you try to call this by.  As an alternative, we are pluralizing this.
+        "/rest/carShows"(controller:"carShowREST"){
             action = [GET:"list"]
         }
         

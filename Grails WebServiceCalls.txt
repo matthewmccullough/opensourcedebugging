@@ -1,12 +1,15 @@
 #Reference Documentation for Grails Web Services
 http://grails.org/doc/1.1.x/guide/13.%20Web%20Services.html
 
+
 #GET ALL SHOWS via REST
-curl -i -H "Accept: text/xml" -X GET http://localhost:8080/JackedUpApp2/rest/carShow/
-#but not without accept type
-curl -i http://localhost:8080/JackedUpApp2/rest/carShow/
-#or a crazy type
-curl -i -H "Accept: text/garbage" -X GET http://localhost:8080/JackedUpApp2/rest/carShow/
+curl -i -H "Accept: text/xml" -X GET http://localhost:8080/JackedUpApp2/rest/carShows/
+#or with the content type (which really signals what is going in, not out, but it works anyway)
+curl -i -H "Content-Type: text/xml" -X GET http://localhost:8080/JackedUpApp2/rest/carShows/
+#but not without accept type (REJECTED)
+curl -i http://localhost:8080/JackedUpApp2/rest/carShows/
+#or a crazy type (ALSO REJECTED)
+curl -i -H "Accept: text/garbage" -X GET http://localhost:8080/JackedUpApp2/rest/carShows/
 
 #GET ALL SHOWS via HTML
 curl -i http://localhost:8080/JackedUpApp2/carShow/list
@@ -14,8 +17,6 @@ curl -i http://localhost:8080/JackedUpApp2/carShow/list
 
 #DELETE SHOW 1 via REST
 curl -i -H "Accept: text/xml" -X DELETE http://localhost:8080/JackedUpApp2/rest/carShow/1
-
-#DELETE SHOW 1 via HTML
 
 
 #GET ONE SHOW via REST
@@ -33,9 +34,11 @@ curl -i -X GET http://localhost:8080/JackedUpApp2/carShow/show/1
 curl -i -H "Accept: text/xml" http://localhost:8080/JackedUpApp2/carShow/show/1
 
 
-#ADD A SHOW
-curl -i -H "Accept: text/xml" -H "Content-Type: text/xml" -X POST http://localhost:8080/JackedUpApp2/rest/show --data "<show id=\"4\"><city>NEWNEW</city><minimumCompetitors>6</minimumCompetitors><state>NEW</state><venue>NEW</venue></show>"
+#SAVE A NEW SHOW
+curl -i -H "Content-Type: text/xml" -X POST http://localhost:8080/JackedUpApp2/rest/carShow/ --data "<carShow><city>NEWNEW</city><minimumCompetitors>6</minimumCompetitors><state>NEW</state><venue>NEW</venue></carShow>"
+#but you can't use accept type, as it only controls the READER methods, not the SAVING ones, or it doesn't parse the XML
+curl -i -H "Accept: text/xml" -X POST http://localhost:8080/JackedUpApp2/rest/carShow/ --data "<carShow><city>NEWNEW</city><minimumCompetitors>6</minimumCompetitors><state>NEW</state><venue>NEW</venue></carShow>"
 
 
 #UPDATE A SHOW
-curl -i -H "Accept: text/xml" -H "Content-Type: text/xml" -X PUT http://localhost:8080/rest/show/4 --data "<show id=\"4\"><city>NEWNEW</city><minimumCompetitors>6</minimumCompetitors><state>NEW</state><venue>NEW</venue></show>"
+curl -i -H "Content-Type: text/xml" -X PUT http://localhost:8080/JackedUpApp2/rest/carShow/1 --data "<carShow id=\"1\"><city>UPDATED</city><minimumCompetitors>6</minimumCompetitors><state>UPDATED</state><venue>UPDATED</venue></carShow>"
