@@ -1,0 +1,329 @@
+{\rtf1\ansi\ansicpg1252\cocoartf949\cocoasubrtf430
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue255;}
+\margl1440\margr1440\vieww22760\viewh19920\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f0\b\fs70 \cf0 Building the App
+\fs24 \
+
+\b0 #Docmentation-style script for creating the app.\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f1 \cf2 grails create-app JackedUpApp\
+grails create-controller CarShow\
+grails create-domain-class CarShow
+\f0 \cf0 \
+\
+Add four fields to CarShow domain object\
+
+\f1 \cf2 String city\
+String state\
+String venue\
+int minimumCompetitors
+\f0 \cf0 \
+\
+Add a constraint to the domain object\
+
+\f1 \cf2 minimumCompetitors(min:3)
+\f0 \cf0 \
+\
+Edit the CarShowController, commenting out the index and adding the scaffolding\
+
+\f1 \cf2 //def index = \{ \}\
+def scaffold = Show\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f0 \cf0 \
+#Add bootstrap data\
+#Edit the BootStrap.groovy file and in the init add:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f1 \cf2 //Test data\
+new Show(city:"Boston", state: "MA", venue: "BigDigDome", minimumCompetitors: 7).save()\
+new Show(city:"Albuquerque", state: "NM", venue: "DustDome", minimumCompetitors: 5).save()
+\f0 \cf0 \
+\
+#Custom URL mapping\
+#http://www.grails.org/URL+mapping\
+#Add resource mapping\
+\
+
+\f1 \cf2 "/rest/show/$id?"(resource:"show")\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f0 \cf0 \
+###############################################\
+### Add controller closures\
+###############################################\
+#We have to fake out the scaffolding for the HTML\
+#http://fisheye.codehaus.org/browse/~raw,r=8877/grails/trunk/grails/src/grails/templates/scaffolding/list.gsp\
+#http://www.grails.org/Scaffolding\
+#\
+#Content Type detection/negotiation\
+#http://grails.org/doc/1.1.x/guide/6.%20The%20Web%20Layer.html#6.8%20Content%20Negotiation\
+#\
+#Automatic parsing with content negotiation\
+#http://blog.devnull.org/2008/08/30/dude-whered-my-inputstream-go/\
+#It will auto-convert XML POST data to an XmlSlurper GPathResult\
+\
+CODE HERE\
+\
+###############################################\
+### Unfuddle, as an example of APIs for REST\
+###############################################\
+#http://unfuddle.com/docs/api/projects\
+#/api/v1/projects[GET, POST]\
+#/api/v1/projects/\{id\}[GET, PUT, DELETE]\
+#/api/v1/projects/by_short_name/\{short_name\}[GET]\
+\
+curl -i -u username:password -X GET \\\
+  -H 'Accept: application/xml' \\\
+  http://mysubdomain.unfuddle.com/api/v1/projects.xml\
+\
+###############################################\
+### Grails Web Services, including SOAP\
+###############################################\
+#http://grails.org/doc/1.1.x/guide/13.%20Web%20Services.html\
+#\
+#static mappings = \{\
+#   "/product/$id?"(resource:"product")\
+#\}\
+#What this does is map the URI /product onto a ProductController. Each HTTP method such as GET, PUT, POST and DELETE map to unique actions within the controller as outlined by the table below:\
+#\
+#Method	Action\
+#GET	show\
+#PUT	update\
+#POST	save\
+#DELETE	delete\
+#\
+#You can alter how HTTP methods by using the capability of URL Mappings to map to HTTP methods:\
+#\
+#"/product/$id"(controller:"product")\{\
+#    action = [GET:"show", PUT:"update", DELETE:"delete", POST:"save"]\
+#\}\
+#However, unlike the resource argument used previously, in this case Grails will not provide automatic XML or JSON marshaling for you unless you specify the parseRequest argument in the URL mapping:\
+#\
+#"/product/$id"(controller:"product", parseRequest:true)\{\
+#    action = [GET:"show", PUT:"update", DELETE:"delete", POST:"save"]\
+#\}\
+#\
+\
+\
+\
+
+\b \
+\
+
+\fs56 Reference Documentation for Grails Web Services
+\b0\fs24 \
+http://grails.org/doc/1.1.x/guide/13.%20Web%20Services.html\
+\
+
+\b Plain Web Browser testing URL\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f1\b0 \cf2 http://localhost:8080/JackedUpApp2/show/list
+\f0 \cf0 \
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\b \cf0 GET ALL SHOWS
+\b0 \
+SUCCEEDS: Get all shows via REST as accept-type XML\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f1 \cf2 curl -i -H "Accept: text/xml" -X GET http://localhost:8080/JackedUpApp2/rest/carShows/
+\f0 \cf0 \
+\
+SUCCEEDS: Get all shows via REST as accept-type JSON\
+
+\f1 \cf2 curl -i -H "Accept: text/json" -X GET http://localhost:8080/JackedUpApp2/rest/carShows/
+\f0 \cf0 \
+\
+SUCCEEDS: Cheat and use the content type field (which really signals what is going in, not out, but it works anyway)\
+
+\f1 \cf2 curl -i -H "Content-Type: text/xml" -X GET http://localhost:8080/JackedUpApp2/rest/carShows/
+\f0 \cf0 \
+\
+FAILS: But not without accept type\
+
+\f1 \cf2 curl -i http://localhost:8080/JackedUpApp2/rest/carShows/
+\f0 \cf0 \
+\
+FAILS: Crazy type\
+
+\f1 \cf2 curl -i -H "Accept: text/garbage" -X GET http://localhost:8080/JackedUpApp2/rest/carShows/
+\f0 \cf0 \
+\
+GET ALL SHOWS via HTML from the normal scaffolded controller\
+
+\f1 \cf2 curl -i http://localhost:8080/JackedUpApp2/carShow/list
+\f0 \cf0 \
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\b \cf0 GET ONE SHOW
+\b0 \
+Get one show via REST via accept type\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f1 \cf2 curl -i -H "Accept: text/xml" http://localhost:8080/JackedUpApp2/rest/carShow/1
+\f0 \cf0 \
+\
+or with the content type\
+
+\f1 \cf2 curl -i -H "Content-Type: text/xml" http://localhost:8080/JackedUpApp2/rest/carShow/1
+\f0 \cf0 \
+\
+SUCCEEDS: or with JSON\
+
+\f1 \cf2 curl -i -H "Content-Type: text/json" http://localhost:8080/JackedUpApp2/rest/carShow/1
+\f0 \cf0 \
+\
+FAILS: but not without any content type or accept type\
+
+\f1 \cf2 curl -i -X GET http://localhost:8080/JackedUpApp2/rest/carShow/1
+\f0 \cf0 \
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\b \cf0 CONTENT TYPE DETECTION on regular scaffolded + custom code HTML CONTROLLER
+\b0 \
+SUCCEEDS: Get one show via the normal human-readable HTML UI\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f1 \cf2 curl -i -X GET http://localhost:8080/JackedUpApp2/carShow/show/1
+\f0 \cf0 \
+\
+SUCCEEDS: Get the same show via the same URL, this time with an accept type to change the response to XML\
+
+\f1 \cf2 curl -i -H "Accept: text/xml" http://localhost:8080/JackedUpApp2/carShow/show/1
+\f0 \cf0 \
+\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\b \cf0 DELETE ONE SHOW
+\b0 \
+FAILS: Delete show 1 via REST, blows up because of automatic XML parsing unless we pass a data block of XML\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f1 \cf2 curl -i -H "Accept: text/xml" -X DELETE http://localhost:8080/JackedUpApp2/rest/carShow/1
+\f0 \cf0 \
+\
+SUCCEEDS: passing a data block of XML with the ID\
+
+\f1 \cf2 curl -i -H "Content-Type: text/xml" -X DELETE http://localhost:8080/JackedUpApp2/rest/carShow --data "<carShow id=\\"1\\"/>"
+\f0 \cf0 \
+\
+SUCCEEDS: Also works without the content type since it doesn't try to parse the XML and we allow HTML on this controller\
+
+\f1 \cf2 curl -i -X DELETE http://localhost:8080/JackedUpApp2/rest/carShow/1
+\f0 \cf0 \
+\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\b \cf0 SAVE A SHOW
+\b0 \
+SUCCEEDS: Save a new show via XML\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f1 \cf2 curl -i -H "Content-Type: text/xml" -X POST http://localhost:8080/JackedUpApp2/rest/carShow/ --data "<carShow><city>NEWNEW</city><minimumCompetitors>6</minimumCompetitors><state>NEW</state><venue>NEW</venue></carShow>"\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f0 \cf0 \
+FAILS: but you can't use accept type, as it only controls the READER methods, not the SAVING ones, or it doesn't parse the XML\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f1 \cf2 curl -i -H "Accept: text/xml" -X POST http://localhost:8080/JackedUpApp2/rest/carShow/ --data "<carShow><city>NEWNEW</city><minimumCompetitors>6</minimumCompetitors><state>NEW</state><venue>NEW</venue></carShow>"
+\f0 \cf0 \
+\
+SUCCEEDS: Save a show via JSON\
+
+\f1 \cf2 curl -i -H "Content-Type: text/json" -X POST http://localhost:8080/JackedUpApp2/rest/carShow/ --data "\{\\"class\\":\\"CarShow\\",\\"city\\":\\"NEWJSON\\",\\"minimumCompetitors\\":77,\\"state\\":\\"NEWJSON\\",\\"venue\\":\\"NEWJSON\\"\}"
+\f0 \cf0 \
+\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\b \cf0 UPDATE AN EXISTING SHOW
+\b0 \
+Update a show via XML\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f1 \cf2 curl -i -H "Content-Type: text/xml" -X PUT http://localhost:8080/JackedUpApp2/rest/carShow/1 --data "<carShow id=\\"1\\"><city>UPDATED</city><minimumCompetitors>6</minimumCompetitors><state>UPDATED</state><venue>UPDATED</venue></carShow>"
+\f0 \cf0 \
+\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\fs68 \cf0 Adding SOAP Support
+\fs24 \
+\
+Add XFIRE plugin\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f1 \cf2 grails install-plugin xfire\
+grails create-service CarShow\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f0 \cf0 \
+add methods to the service\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f1 \cf2 class CarShowService \{\
+  static expose=['xfire']\
+  boolean transactional = true\
+\
+  CarShow getCarShow(int id)\{\
+    return CarShow.get(id)\
+  \}\
+  \
+  boolean isValidCarShow(int id)\{\
+    return (CarShow.get(id) != null)\
+  \}\
+  \
+  \
+  List<CarShow> getAllCarShows()\{\
+    return CarShow.list()\
+  \}\
+\}
+\f0 \cf0 \
+\
+View the WSDL.\
+
+\f1 \cf2 http://localhost:8080/JackedUpApp2/services/carShow?wsdl
+\f0 \cf0 \
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\fs66 \cf0 JavaScript Library Addition
+\fs24 \
+Add the grails-ui JavaScript libraries\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f1 \cf2 http://www.grails.org/plugin/grails-ui
+\f0 \cf0 \
+
+\f1 \cf2 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f0 \cf0 Install the plugins
+\f1 \cf2 \
+grails install-plugin yui\
+grails install-plugin bubbling\
+grails install-plugin grails-ui\
+\
+
+\f0 \cf0 A}
