@@ -4,13 +4,14 @@
         <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'main.css')}" />
         <link rel="shortcut icon" href="${createLinkTo(dir:'images',file:'favicon.ico')}" type="image/x-icon" />
         <g:layoutHead />
-        <g:javascript library="application" />				
+        <g:javascript library="scriptaculous" />
+        <g:javascript library="application" />
     </head>
     <body>
         <div id="spinner" class="spinner" style="display:none;">
             <img src="${createLinkTo(dir:'images',file:'spinner.gif')}" alt="Spinner" />
         </div>	
-        <div class="logo"><img src="${createLinkTo(dir:'images',file:'grails_logo.jpg')}" alt="Grails" /></div>	
+        <div class="logo"><a href="#" onclick="new Effect.Puff('logo'); return false;"><img src="${createLinkTo(dir:'images',file:'grails_logo.jpg')}" alt="Grails" id="logo"/></a></div>	
         <g:layoutBody />		
     </body>	
 </html>
