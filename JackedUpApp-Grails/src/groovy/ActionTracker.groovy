@@ -3,6 +3,7 @@ public class ActionTracker {
   static String SAVE = "SAVE"
   static String UPDATE = "UPDATE"
   static String DELETE = "DELETE"
+  static String SHOW = "SHOW"
   
   static Map actions = new HashMap()
   

@@ -19,6 +19,8 @@ class CarShowRESTController {
       return
     }
     
+    ActionTracker.track(ActionTracker.SHOW, carShowInstance)
+    
     withFormat {
       html { render "ERROR! The SHOW RETRIEVAL service only supports JSON and XML Accept types"}
       json { render carShowInstance as JSON }
@@ -89,6 +91,8 @@ class CarShowRESTController {
           hasErrors = true
       }
       
+      ActionTracker.track(ActionTracker.UPATE, carShowInstance)
+      
       withFormat {
         html { render "ERROR! The UPDATE service only supports JSON and XML Accept types"}
         json {
@@ -120,6 +124,8 @@ class CarShowRESTController {
       id = params.carShow.id
     }
     def carShowInstance = CarShow.get( id )
+    
+    ActionTracker.track(ActionTracker.DELETE, carShowInstance)
     
     if (carShowInstance) {
       carShowInstance.delete()
