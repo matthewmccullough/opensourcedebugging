@@ -1,7 +1,7 @@
 {\rtf1\ansi\ansicpg1252\cocoartf949\cocoasubrtf430
 {\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Monaco;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue255;}
-\margl1440\margr1440\vieww22760\viewh19920\viewkind0
+\margl1440\margr1440\vieww22760\viewh16120\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
 
 \f0\b\fs70 \cf0 Building the App
@@ -115,13 +115,15 @@ curl -i -u username:password -X GET \\\
 
 \b \
 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
 
-\fs56 Reference Documentation for Grails Web Services
+\fs56 \cf0 Reference Documentation for Grails Web Services
 \b0\fs24 \
 http://grails.org/doc/1.1.x/guide/13.%20Web%20Services.html\
 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
 
-\b Plain Web Browser testing URL\
+\b \cf0 Plain Web Browser testing URL\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
 
 \f1\b0 \cf2 http://localhost:8080/JackedUpApp2/show/list
@@ -130,8 +132,22 @@ http://grails.org/doc/1.1.x/guide/13.%20Web%20Services.html\
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
 
-\b \cf0 GET ALL SHOWS
-\b0 \
+\b \cf0 GET ALL SHOWS\
+
+\b0 FAILS: But not without accept type\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f1 \cf2 curl http://localhost:8080/JackedUpApp2/rest/carShows/\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f0 \cf0 \
+FAILS: But not without accept type. Let's include HTTP header\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f1 \cf2 curl -i http://localhost:8080/JackedUpApp2/rest/carShows/\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f0 \cf0 \
 SUCCEEDS: Get all shows via REST as accept-type XML\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
 
@@ -146,11 +162,6 @@ SUCCEEDS: Get all shows via REST as accept-type JSON\
 SUCCEEDS: Cheat and use the content type field (which really signals what is going in, not out, but it works anyway)\
 
 \f1 \cf2 curl -i -H "Content-Type: text/xml" -X GET http://localhost:8080/JackedUpApp2/rest/carShows/
-\f0 \cf0 \
-\
-FAILS: But not without accept type\
-
-\f1 \cf2 curl -i http://localhost:8080/JackedUpApp2/rest/carShows/
 \f0 \cf0 \
 \
 FAILS: Crazy type\
