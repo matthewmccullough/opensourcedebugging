@@ -8,4 +8,8 @@ class CarShow {
   String state
   String venue
   int minimumCompetitors
+  
+  String toString() {
+    return "CARSHOW [City: ${city}, State: ${state}, Venue: ${venue}, minComp: ${minimumCompetitors}]"
+  }
 }

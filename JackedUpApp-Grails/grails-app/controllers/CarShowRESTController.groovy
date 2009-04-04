@@ -34,6 +34,8 @@ class CarShowRESTController {
       //println "SAVE PARAMS = " + params
       def carShowInstance = new CarShow(params['carShow'])
       
+      ActionTracker.track(ActionTracker.SAVE, carShowInstance)
+      
       def hasErrors = false
       
       //println "NEWCARSHOW obj = " + carShowInstance.properties
@@ -156,6 +158,9 @@ class CarShowRESTController {
 
   //GET to retrieve list of all objects
   def list = {
+    ActionTracker.track(ActionTracker.LIST, CarShow.list())
+    ActionTracker.printHistory()
+    
     withFormat {
       html { render "ERROR! The LIST ALL SHOWS service only supports JSON and XML Accept types"}
       json { render CarShow.list() as JSON }
