@@ -15,6 +15,10 @@ body {
     background: #fff;
     color: #333;
     font: 11px verdana, arial, helvetica, sans-serif;
+	
+	/*BROKEN: Custom attributes/adjustments*/
+	/*Everything should inherit this color, must override to change*/
+	color:green;
 }
 
 a:link, a:visited, a:hover {
@@ -77,6 +81,12 @@ input:focus, select:focus, textarea:focus {
     color: #333;
     padding: 4px 6px;
 }
+
+/*BROKEN: New hover class for all links*/
+.menuButton a:hover {
+	border: solid 3px yellow;
+}
+
 .menuButton a.home {
     background: url(../images/skin/house.png) center left no-repeat;
     color: #333;
@@ -135,6 +145,36 @@ table {
 }
 tr {
     border: 0;
+	
+	/*BROKEN: Custom attributes/adjustments*/
+	
+	/*
+		The Purple ineherits. So why doesn't the size?
+		
+		From FireBug perspective if you examine just down to
+		the TR of any row, it clearly shows font size is overriding
+		the font-size from "body".
+		
+		Let's say you've been staring at the code and don't dig deeper to
+		all the styles applied against all "td" selectors (below).
+		
+		In Firebug, clicking on any "tr" will show the inherited values
+		including the purple text and massive font size--but it doesn't
+		show on the final page.
+		
+		The drill in, simply expand the child tags (the TR's td) and click
+		on the child node.
+		
+		Firebug will quickly identify that the font-size attribute applied 
+		on the TR is being crossed-out, or overridden by some child's attribute.
+		
+		Easily, this proves that the child tag must have a font-size attribute
+		overriding the 30pt specification in the TR.
+		
+		Viola, problem solved!
+	*/
+	color:purple;
+	font-size:30pt;
 }
 td, th { 
     font: 11px verdana, arial, helvetica, sans-serif;
@@ -142,6 +182,14 @@ td, th {
     padding: 5px 6px;
     text-align: left;
     vertical-align: top;
+	
+	/*BROKEN: Custom attributes/adjustments*/
+	/*
+		Note the attributes applied equally to the TD and TH.
+		This is usually poor practice as attributes thought to apply
+		might be overriden by a selector on a single tag like the TH (below).
+	*/
+	border:solid 1px red;
 }
 th {
     background: #fff url(../images/skin/shadow.jpg);
@@ -150,6 +198,19 @@ th {
     font-weight: bold;
     line-height: 17px;
     padding: 2px 6px;
+	
+	/*BROKEN: Custom attributes/adjustments*/
+	/*
+		Even though the selector class above applies a red border
+		this attribute now overrides, changing the color.
+		
+		By using Firebug, it's simple to see that only the "td,th" attribute
+		for border is applying red on the TDs, but something is happening to the TH.
+		
+		Simply clicking on the TH tag within Firebug quickly shows that there are dual
+		selector classes applying to TH, overriding the red border and replacing it with green.
+	*/
+	border:solid 1px green;
 }
 th a:link, th a:visited, th a:hover {
     color: #333;
