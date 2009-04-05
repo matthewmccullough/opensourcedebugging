@@ -1,0 +1,1 @@
+jmap -dump:file=myfile.dump $1
