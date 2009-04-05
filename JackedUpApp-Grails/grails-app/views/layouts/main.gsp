@@ -11,7 +11,7 @@
         <div id="spinner" class="spinner" style="display:none;">
             <img src="${createLinkTo(dir:'images',file:'spinner.gif')}" alt="Spinner" />
         </div>	
-        <div class="logo"><a href="#" onclick="new Effect.Puff('logo'); return false;"><img src="${createLinkTo(dir:'images',file:'grails_logo.jpg')}" alt="Grails" id="logo"/></a></div>	
+        <div class="logo"><a href="#" onclick="new Effect.Puff('logo1'); return false;"><img src="${createLinkTo(dir:'images',file:'grails_logo.jpg')}" alt="Grails" id="logo"/></a></div>	
         <g:layoutBody />		
     </body>	
 </html>
