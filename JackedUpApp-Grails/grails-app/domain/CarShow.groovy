@@ -1,4 +1,6 @@
-class CarShow {
+import java.io.Serializable
+
+class CarShow implements Serializable {
 
   static constraints = {
     minimumCompetitors(min:3)

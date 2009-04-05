@@ -1,23 +1,32 @@
 import grails.converters.XML
 import grails.converters.JSON
 import javax.swing.text.html.HTML
+import java.io.Serializable
 
 class CarShowRESTController {
   //Not really necessary since the resource RESTful mapping already routes to these four methods
   // based on the verb, but it shows the power of the constraints
   static def allowedMethods = [delete:'DELETE', save:'POST', update:'PUT', show:'GET'] 
   
+  private void serialize(CarShow obj) {
+    FileOutputStream fileOutStream = new FileOutputStream("my-car-show-" + new Random().nextInt() + ".dat");
+    ObjectOutputStream objOutStream = new ObjectOutputStream (fileOutStream);
+    objOutStream.writeObject ( obj );
+  }
+  
   /**
    * HTTP GET
    * Retrieve one CarShow
    */
   def show = {
-    def carShowInstance = CarShow.get( params.id )
+    CarShow carShowInstance = CarShow.get( params.id )
     
     if (carShowInstance == null) {
       render "RECORDNOTFOUND"
       return
     }
+    
+    serialize(carShowInstance)
     
     withFormat {
       html { render "ERROR! The SHOW RETRIEVAL service only supports JSON and XML Accept types"}
