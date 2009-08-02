@@ -10,21 +10,24 @@
 
 \f0\b Grails App UI
 \f1\b0 \
-http://localhost:8080/restgrails/contestant/list\
+http://localhost:8080/JackedUpApp2/show/list\
 \
 
 \f0\b CURL\
 
 \f1\b0 curl www.ambientideas.com\
-curl www.microsoft.com\
-curl -X GET http://localhost:8080/restgrails/contestantREST/[1-6:2]\
-curl -X GET http://localhost:8080/restgrails/contestantsREST/\
+curl microsoft.com\
+curl -i microsoft.com\
+curl -i www.microsoft.com\
+curl -i www.microsoft.com/en/us/default.aspx\
+\
+\
 
 \f0\b \
 TCPDump\
 
-\f1\b0 sudo tcpdump -i en1 -v -X -s 1514\
-sudo tcpdump -i en1 -c2 icmp\
+\f1\b0 sudo tcpdump -i lo0 -v -X -s 1514\
+sudo tcpdump -i lo0 -c2 icmp\
 \
 
 \f0\b Wireshark
