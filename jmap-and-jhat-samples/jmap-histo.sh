@@ -1,1 +1,0 @@
-jmap -histo $1

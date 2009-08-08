@@ -1,1 +1,0 @@
-javap -c -s -private -verbose target/classes/com.ambientideas.App
