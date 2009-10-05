@@ -1,4 +1,4 @@
-{\rtf1\ansi\ansicpg1252\cocoartf949\cocoasubrtf460
+{\rtf1\ansi\ansicpg1252\cocoartf949\cocoasubrtf540
 {\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Monaco;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue255;}
 \vieww15960\viewh12060\viewkind0
@@ -103,7 +103,10 @@ SUCCEEDS: Get the same show via the same URL, this time with an accept type to c
 
 \f1 \cf2 curl -i -H "Accept: text/xml" http://localhost:8080/JackedUpApp2/carShow/show/1
 \f0 \cf0 \
-\
+
+\f1 \cf2 curl -i -X GET http://localhost:8080/JackedUpApp2/carShow/show/1.xml\
+curl -i -X GET http://localhost:8080/JackedUpApp2/carShow/show/1.json
+\f0 \cf0 \
 \
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
