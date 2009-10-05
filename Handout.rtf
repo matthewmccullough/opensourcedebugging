@@ -22,12 +22,33 @@ curl microsoft.com\
 curl -i microsoft.com\
 curl -i www.microsoft.com\
 curl -i www.microsoft.com/en/us/default.aspx\
+\
+curl with -X POST GET PUT DELETE\
+curl with -H "Accept: text/xml"\
 
 \f0\b \
 TCPDump\
 
-\f1\b0 sudo tcpdump -i lo0 -v -X -s 1514\
-sudo tcpdump -i lo0 -c2 icmp\
+\f1\b0 #Verbose\
+sudo tcpdump -i lo0 -v\
+#Port Numbers\
+sudo tcpdump -i lo0 -n\
+#ASCII\
+sudo tcpdump -i lo0 -A\
+#ASCII and HEX\
+sudo tcpdump -i lo0 -X\
+#Snaplength 1514\
+sudo tcpdump -i lo0 -s 1514\
+#Snaplength automatic\
+sudo tcpdump -i lo0 -s 0\
+#Capture 5 samples\
+sudo tcpdump -i lo0 -c5\
+#Output to a file\
+sudo tcpdump -i lo0 -w myoutput.pcap\
+#Capture only ICMP\
+sudo tcpdump -i lo0 icmp\
+#Capture only tcp on port 8080\
+sudo tcpdump -i lo0 tcp port 8080\
 \
 
 \f0\b Wireshark
@@ -50,4 +71,11 @@ lsof -iTCP:8080\
 HackBar for SplitURL
 \f1\b0 \
 http://www.google.com/search?q=hackbar&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:en-US:official&client=firefox-a\
+\
+\
+
+\f0\b iWatch
+\f1\b0 \
+iwatch .\
+echo HELLOWORLD >> hello.txt\
 }
