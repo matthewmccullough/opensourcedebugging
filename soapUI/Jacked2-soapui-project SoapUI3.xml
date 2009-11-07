@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:def="http://DefaultNamespace">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <def:getAllCarShowsResponse>
+         <def:out>
+            <!--Zero or more repetitions:-->
+            <def:CarShow>
+               <!--Optional:-->
+               <def:city>Reston</def:city>
+               <!--Optional:-->
+               <def:id>56</def:id>
+               <!--Optional:-->
+               <def:minimumCompetitors>12</def:minimumCompetitors>
+               <!--Optional:-->
+               <def:state>VA</def:state>
+               <!--Optional:-->
+               <def:venue>CapitalDome</def:venue>
+               <!--Optional:-->
+               <def:version>4</def:version>
+            </def:CarShow>
+         </def:out>
+      </def:getAllCarShowsResponse>
+   </soapenv:Body>
+</soapenv:Envelope>
