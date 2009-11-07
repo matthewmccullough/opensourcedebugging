@@ -1,0 +1,91 @@
+<?xml version="1.0" standalone="yes"?>
+<definitions targetNamespace="http://www.ambientideas.com" name="SystemService" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.ambientideas.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <types>
+    <xsd:schema>
+      <xsd:import namespace="http://www.ambientideas.com" schemaLocation="SystemService_schema1.xsd"/>
+    </xsd:schema>
+  </types>
+  <message name="Execute">
+    <part name="parameters" element="tns:Execute"/>
+  </message>
+  <message name="ExecuteResponse">
+    <part name="parameters" element="tns:ExecuteResponse"/>
+  </message>
+  <message name="ApiException">
+    <part name="fault" element="tns:ApiException"/>
+  </message>
+  <message name="ExecuteScript">
+    <part name="parameters" element="tns:ExecuteScript"/>
+  </message>
+  <message name="ExecuteScriptResponse">
+    <part name="parameters" element="tns:ExecuteScriptResponse"/>
+  </message>
+  <message name="CheckSystem">
+    <part name="parameters" element="tns:CheckSystem"/>
+  </message>
+  <message name="CheckSystemResponse">
+    <part name="parameters" element="tns:CheckSystemResponse"/>
+  </message>
+  <portType name="System">
+    <operation name="Execute">
+      <input message="tns:Execute"/>
+      <output message="tns:ExecuteResponse"/>
+      <fault message="tns:ApiException" name="ApiException"/>
+    </operation>
+    <operation name="ExecuteScript">
+      <input message="tns:ExecuteScript"/>
+      <output message="tns:ExecuteScriptResponse"/>
+      <fault message="tns:ApiException" name="ApiException"/>
+    </operation>
+    <operation name="CheckSystem">
+      <input message="tns:CheckSystem"/>
+      <output message="tns:CheckSystemResponse"/>
+      <fault message="tns:ApiException" name="ApiException"/>
+    </operation>
+  </portType>
+  <binding name="SystemPortBinding" type="tns:System">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <operation name="Execute">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="ApiException">
+        <soap:fault name="ApiException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="ExecuteScript">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="ApiException">
+        <soap:fault name="ApiException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="CheckSystem">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="ApiException">
+        <soap:fault name="ApiException" use="literal"/>
+      </fault>
+    </operation>
+  </binding>
+  <service name="SystemService">
+    <port name="SystemPort" binding="tns:SystemPortBinding">
+      <soap:address location="http://10.230.100.123:2810/services/SystemService"/>
+    </port>
+  </service>
+</definitions>
+
